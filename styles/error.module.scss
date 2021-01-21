@@ -1,0 +1,11 @@
+$color: red;
+
+.error {
+  &__title {
+    color: $color;
+  }
+
+  a {
+    color: green;
+  }
+}

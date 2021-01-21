@@ -5,7 +5,7 @@ const About = () => {
   console.log(Router);
 
   return (
-    <MainLayout>
+    <MainLayout pageTitle='About page'>
       <h1>About page</h1>
 
       <button type="button" onClick={() => Router.push('/')}>Go to main page</button>
