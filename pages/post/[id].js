@@ -1,6 +1,6 @@
 import Link from "next/link";
 import {useRouter} from "next/router";
-import { useState, useEffect } from "react";
+import {useState, useEffect} from "react";
 import MainLayout from "../../components/main-layout";
 
 const Post = ({post: serverPost}) => {
@@ -31,9 +31,7 @@ const Post = ({post: serverPost}) => {
   return (
     <MainLayout>
       <h1>{post.title}</h1>
-
       <hr/>
-
       <p>{post.body}</p>
 
       <Link href="/posts">Back to posts</Link>
@@ -61,7 +59,7 @@ Post.getInitialProps = async (ctx) => {
 
   return {
     post: result,
-  }
+  };
 };
 
 export default Post;
