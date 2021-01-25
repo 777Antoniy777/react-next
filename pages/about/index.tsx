@@ -1,7 +1,12 @@
 import Router from "next/router";
+import {NextPage} from "next";
 import MainLayout from "../../components/main-layout";
 
-const About = ({title}) => {
+interface Props {
+  title: string;
+}
+
+const About: NextPage<Props> = ({title}) => {
   return (
     <MainLayout pageTitle='About page'>
       <h1>{title}</h1>
@@ -11,9 +16,9 @@ const About = ({title}) => {
   );
 };
 
-About.getInitialProps = async (ctx) => {
-  const response = await fetch(`http://localhost:4200/about`);
-  const result = await response.json();
+About.getInitialProps = async () => {
+  const response = await fetch(`${process.env.BASE_URL}/about`);
+  const result: {title: string} = await response.json();
 
   return {
     title: result.title,

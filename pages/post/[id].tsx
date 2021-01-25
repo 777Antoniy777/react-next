@@ -1,15 +1,27 @@
 import Link from "next/link";
 import {useRouter} from "next/router";
 import {useState, useEffect} from "react";
+import {NextPage, NextPageContext} from "next";
+import {PostProps} from "../../interfaces/posts";
 import MainLayout from "../../components/main-layout";
 
-const Post = ({post: serverPost}) => {
+interface Props {
+  post: PostProps;
+}
+
+interface PostNextPageContext extends NextPageContext {
+  query: {
+    id: string
+  };
+}
+
+const Post: NextPage<Props> = ({post: serverPost}) => {
   const [post, setPost] = useState(serverPost);
   const router = useRouter();
 
   useEffect(() => {
     const loadPost = async () => {
-      const response = await fetch(`http://localhost:4200/posts/${router.query.id}`);
+      const response = await fetch(`${process.env.BASE_URL}/posts/${router.query.id}`);
       const result = await response.json();
 
       setPost(result);
@@ -45,7 +57,7 @@ const Post = ({post: serverPost}) => {
   );
 };
 
-Post.getInitialProps = async (ctx) => {
+Post.getInitialProps = async (ctx: PostNextPageContext) => {
   const {query, req} = ctx;
 
   if (!req) {
@@ -55,7 +67,7 @@ Post.getInitialProps = async (ctx) => {
   }
 
   const response = await fetch(`http://localhost:4200/posts/${query.id}`);
-  const result = await response.json();
+  const result: PostProps = await response.json();
 
   return {
     post: result,

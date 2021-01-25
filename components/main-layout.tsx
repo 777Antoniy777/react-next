@@ -18,6 +18,7 @@ const MainLayout = ({children, pageTitle = 'Next.js app'}) => {
         {children}
       </main>
 
+      {/* DetailedHTMLProps<StyleHTMLAttributes<HTMLStyleElement>, HTMLStyleElement> */}
       <style jsx global>{`
         nav {
           display: flex;
